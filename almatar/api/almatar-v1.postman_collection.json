@@ -1,0 +1,3592 @@
+{
+  "info": {
+    "_postman_id": "eb42de70-d926-4032-ad3f-54f93b115820",
+    "name": "almatar-v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51102777",
+    "_collection_link": "https://go.postman.co/collection/51102777-eb42de70-d926-4032-ad3f-54f93b115820?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "user managment",
+      "item": [
+        {
+          "name": "rest password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response status code is 201\", function () {\r",
+                  "    pm.expect(pm.response.code).to.equal(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains reset password message\", function () {\r",
+                  "    const response = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(response.data).to.include(\"Email has been sent to Reset Password\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en-US,en;q=0.9"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/auth/request-password"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Microsoft Edge\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"testw@mailna.co\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/auth/request-pass",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "auth",
+                "request-pass"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.environment.set(\"authTokenR\", pm.response.json().data.token);\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0ZDU3MTJlZS1hMGY5LTRkZTEtYjFkMC1iNmU0NDY2YzE0MTAiLCJ1c2VyIjp7InV1aWQiOiI0ZDU3MTJlZS1hMGY5LTRkZTEtYjFkMC1iNmU0NDY2YzE0MTAiLCJlbWFpbCI6InRlc3R3QG1haWxuYS5jbyIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiIxMjMgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDgwODU1NSwiZXhwIjoxNzg0ODEyMTU1fQ.oq9cKZOuflN4KTxD9mW-9S4Ov8xlutFHvO4RN24clrA"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0ZDU3MTJlZS1hMGY5LTRkZTEtYjFkMC1iNmU0NDY2YzE0MTAiLCJ1c2VyIjp7InV1aWQiOiI0ZDU3MTJlZS1hMGY5LTRkZTEtYjFkMC1iNmU0NDY2YzE0MTAiLCJlbWFpbCI6InRlc3R3QG1haWxuYS5jbyIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiIxMjMgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDgwODU1NSwiZXhwIjoxNzg0ODEyMTU1fQ.oq9cKZOuflN4KTxD9mW-9S4Ov8xlutFHvO4RN24clrA"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Microsoft Edge\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"password\":\"1Qaz2wsx#\",\"id\":\"4d5712ee-a0f9-4de1-b1d0-b6e4466c1410\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/auth/reset-pass",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "auth",
+                "reset-pass"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authTokenR}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en-US,en;q=0.9"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/auth/login"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Microsoft Edge\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"password\":\"1Qaz2wsx#\",\"email\":\"testw@mailna.co\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/auth/login",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "userprofile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.environment.set(\"authTokenR\", pm.response.json().data.token);\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authTokenR}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0ZDU3MTJlZS1hMGY5LTRkZTEtYjFkMC1iNmU0NDY2YzE0MTAiLCJ1c2VyIjp7InV1aWQiOiI0ZDU3MTJlZS1hMGY5LTRkZTEtYjFkMC1iNmU0NDY2YzE0MTAiLCJlbWFpbCI6InRlc3R3QG1haWxuYS5jbyIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiIxMjMgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifSwiZW1wbG95ZWUiOnsidXVpZCI6IjVlZGU5ODdlLTRiYjMtNGU5YS1iMzkxLWExNTBkY2EzY2IyMSIsImZpcnN0TmFtZSI6ImRkIiwibWlkZGxlTmFtZSI6ImRkIiwibGFzdE5hbWUiOiJkZGQiLCJmdWxsTmFtZSI6ImRkIGRkIGRkZCIsImVtYWlsIjoidGVzdHdAbWFpbG5hLmNvIiwicGhvbmUiOiIrMjAxMDYxMTEyMzU2IiwiZG9jdW1lbnRUeXBlIjoiaWQtY2FyZCIsImRvY3VtZW50SWQiOiIwMTAxMDEwMCIsIm9mZmljZSI6eyJ1dWlkIjoiMjE1NGM1OTUtZjQ5OC00ZmQwLWIyODgtMzFiM2E4MWQ1ZDhmIiwiaXNNYWluIjpmYWxzZSwic3VwcGxpZXJVdWlkIjoiMzUxYjMwNmItYzc2Mi00MzFjLWI2NzktODgyNzQ4YjBlYzZlIiwiY291bnRyeSI6IlNhdWRpIEFyYWJpYSIsImNpdHkiOiJBbCBNYWptYSdhaCIsInBvc3RhbENvZGUiOiIxMjM0NSIsImFkZHJlc3MxIjoiWEczWCs2SCBBbCBNYWptYSdhaCBTYXVkaSBBcmFiaWEiLCJhZGRyZXNzMiI6IjEyMzQ1IiwibGF0IjotMzUuMTM4MTQwNDcxOTAzNzcsImxuZyI6NDUuNTQ4OTY5NzI2NTYyNDgsIndvcmtpbmdIb3VycyI6W119fX0sImlhdCI6MTc4NDgwOTY1OCwiZXhwIjoxNzg0ODEzMjU4fQ.8TErRkLSE4WAVoYn8mLIHgyhhaOuPMUVtAX-tbofsIs"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/user-profile"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Microsoft Edge\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\":\"dd\",\"middleName\":\"dd\",\"lastName\":\"ddd\",\"language\":\"ar\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/auth/update-profile",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "auth",
+                "update-profile"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.environment.set(\"authToken\", pm.response.json().data.token);\r",
+                  "\r",
+                  "pm.test(\"user loggedin successfully\", function () {\r",
+                  "    pm.response.to.have.status(\"Created\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response time is less than 800ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en-US,en;q=0.9,ar-AE;q=0.8,ar;q=0.7"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/auth/login"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"testw@mailna.co\",\"password\":\"1Qaz2wsx#\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/auth/login",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "verify inventory structure by maker",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Response status is 200\", function () {\r",
+                  "    pm.expect(response.status).to.eql(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains data array\", function () {\r",
+                  "    pm.expect(response.data).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Each data item contains label and total\", function () {\r",
+                  "    response.data.forEach(function (item) {\r",
+                  "        pm.expect(item).to.have.property(\"label\");\r",
+                  "        pm.expect(item).to.have.property(\"total\");\r",
+                  "    });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NDk2NTkwLCJleHAiOjE3ODQ1MDAxOTB9._1Xz3tteUBws9N_tEmczSyidLSjuXv043Q6fRMtp0D0"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "if-none-match",
+                "value": "W/\"15a-oNoJBJHjCRBQAtS6ZSvg8t9Gtwo\""
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/dashboard"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/inventories/structure/351b306b-c762-431c-b679-882748b0ec6e/maker",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "inventories",
+                "structure",
+                "351b306b-c762-431c-b679-882748b0ec6e",
+                "maker"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "verify inventory structure by group",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Response status is 200\", function () {\r",
+                  "    pm.expect(response.status).to.eql(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains data array\", function () {\r",
+                  "    pm.expect(response.data).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Each data item contains label and total\", function () {\r",
+                  "    response.data.forEach(function (item) {\r",
+                  "        pm.expect(item).to.have.property(\"label\");\r",
+                  "        pm.expect(item).to.have.property(\"total\");\r",
+                  "    });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NDk2NTkwLCJleHAiOjE3ODQ1MDAxOTB9._1Xz3tteUBws9N_tEmczSyidLSjuXv043Q6fRMtp0D0"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "if-none-match",
+                "value": "W/\"da-Ditf/e67t0mMHIaXrPfjKLVh+1g\""
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/dashboard"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/inventories/structure/351b306b-c762-431c-b679-882748b0ec6e/group",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "inventories",
+                "structure",
+                "351b306b-c762-431c-b679-882748b0ec6e",
+                "group"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "verify inventory structure by group Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response status is 200\", function () {\r",
+                  "    pm.expect(response.status).to.eql(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains data array\", function () {\r",
+                  "    pm.expect(response.data).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Each data item contains label and total\", function () {\r",
+                  "    response.data.forEach(function (item) {\r",
+                  "        pm.expect(item).to.have.property(\"label\");\r",
+                  "        pm.expect(item).to.have.property(\"total\");\r",
+                  "    });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NDk2NTkwLCJleHAiOjE3ODQ1MDAxOTB9._1Xz3tteUBws9N_tEmczSyidLSjuXv043Q6fRMtp0D0"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "if-none-match",
+                "value": "W/\"85-loaVTYgzb5WyJ2F+EG8Ng9MveiU\""
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/dashboard"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/inventories/structure/351b306b-c762-431c-b679-882748b0ec6e/year",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "inventories",
+                "structure",
+                "351b306b-c762-431c-b679-882748b0ec6e",
+                "year"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Branches",
+      "item": [
+        {
+          "name": "Branch",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "// Generate a random latitude value between -90 and 90\r",
+                  "const randomLat = Math.random() * 180 - 90;\r",
+                  "\r",
+                  "// Update the request body with the new latitude\r",
+                  "pm.request.body.raw = pm.request.body.raw.replace(/\"lat\":\\s*[\\d.-]+/, `\"lat\": ${randomLat}`);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Branch is created successfully\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Branch address information exists\", function () {\r",
+                  "    pm.expect(response.data).to.have.property(\"country\");\r",
+                  "    pm.expect(response.data).to.have.property(\"city\");\r",
+                  "    pm.expect(response.data).to.have.property(\"address1\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Latitude and longitude are valid\", function () {\r",
+                  "    pm.expect(response.data.lat).to.be.within(-90, 90);\r",
+                  "    pm.expect(response.data.lng).to.be.within(-180, 180);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "const responseBody = pm.response.json();\r",
+                  "\r",
+                  "pm.environment.set(\"uuid\", responseBody.data.uuid);\r",
+                  "\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NDk2NTkwLCJleHAiOjE3ODQ1MDAxOTB9._1Xz3tteUBws9N_tEmczSyidLSjuXv043Q6fRMtp0D0"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/branches/add"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"supplierUuid\":\"351b306b-c762-431c-b679-882748b0ec6e\",\"country\":\"Saudi Arabia\",\"city\":\"Al Majma'ah\",\"postalCode\":\"12345\",\"address1\":\"XG3X+6H Al Majma'ah Saudi Arabia\",\"address2\":\"12345\",\"isMain\":false,\"lat\":225.953011511769578,\"lng\":45.54896972656248}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/suppliers/office",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "suppliers",
+                "office"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response status is 200\", function () {\r",
+                  "    pm.expect(response.status).to.eql(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Branch UUID is generated\", function () {\r",
+                  "    pm.expect(response.data.uuid).to.be.a(\"string\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Supplier UUID is correct\", function () {\r",
+                  "    pm.expect(response.data.supplierUuid)\r",
+                  "        .to.eql(\"351b306b-c762-431c-b679-882748b0ec6e\");\r",
+                  "});\r",
+                  "\r",
+                  "// Save branch UUID for the next request\r",
+                  "pm.environment.set(\"uuid\", response.data.uuid);\r",
+                  "\r",
+                  "// Save country and city for the next request\r",
+                  "pm.environment.set(\"country\", response.data.country);\r",
+                  "pm.environment.set(\"city\", response.data.city);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NDk2NTkwLCJleHAiOjE3ODQ1MDAxOTB9._1Xz3tteUBws9N_tEmczSyidLSjuXv043Q6fRMtp0D0"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/branches/edit/74b5076c-b606-4ec5-a7e9-7ff1958b3817"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"supplierUuid\":\"351b306b-c762-431c-b679-882748b0ec6e\",\"country\":\"Saudi Arabia\",\"city\":\"Al Majma'ah\",\"postalCode\":\"12345\",\"address1\":\"XG3X+6H Al Majma'ah Saudi Arabia\",\"address2\":\"12345\",\"workingHours\":[],\"isMain\":false}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/suppliers/office/{{uuid}}",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "suppliers",
+                "office",
+                "{{uuid}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "const uuid = pm.environment.get(\"uuid\");\r",
+                  "\r",
+                  "let branchExists = false;\r",
+                  "\r",
+                  "for (let item of response.data.items) {\r",
+                  "    if (item.uuid === uuid) {\r",
+                  "        branchExists = true;\r",
+                  "    }\r",
+                  "}\r",
+                  "\r",
+                  "pm.test(\"Created branch exists in filtered results\", function () {\r",
+                  "    pm.expect(branchExists).to.be.true;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en-US,en;q=0.9,ar-AE;q=0.8,ar;q=0.7"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NTAwMzU3LCJleHAiOjE3ODQ1MDM5NTd9.rKzFnNbIfol2KPzTq-bUh2sGlxuWFxXSXpkUcyF_6pc"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/branches/manage"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api//v1/rental-car-service/suppliers/office?supplierUuid=351b306b-c762-431c-b679-882748b0ec6e&country={{country}}&city={{city}}&offset=1&limit=10",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "",
+                "v1",
+                "rental-car-service",
+                "suppliers",
+                "office"
+              ],
+              "query": [
+                {
+                  "key": "supplierUuid",
+                  "value": "351b306b-c762-431c-b679-882748b0ec6e"
+                },
+                {
+                  "key": "country",
+                  "value": "{{country}}"
+                },
+                {
+                  "key": "city",
+                  "value": "{{city}}"
+                },
+                {
+                  "key": "offset",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response time is less than 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NDk2NTkwLCJleHAiOjE3ODQ1MDAxOTB9._1Xz3tteUBws9N_tEmczSyidLSjuXv043Q6fRMtp0D0"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/branches/manage"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/suppliers/office/{{uuid}}",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "suppliers",
+                "office",
+                "{{uuid}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Employees",
+      "item": [
+        {
+          "name": "Register new employee",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "let number = Math.floor(Math.random() * 1000);\r",
+                  "\r",
+                  "pm.request.body.raw = pm.request.body.raw.replace(\r",
+                  "    \"testw@mailna.co\",\r",
+                  "    `testw+${number}@mailna.co`\r",
+                  ");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseBody = pm.response.json();\r",
+                  "\r",
+                  "pm.environment.set(\"uuidForEmployee\", responseBody.data.uuid);\r",
+                  "\r",
+                  "pm.test(\"Employee created successfully\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Employee UUID is generated\", function () {\r",
+                  "  pm.expect(responseBody.data.uuid).to.be.a(\"string\");\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NTAwMzU3LCJleHAiOjE3ODQ1MDM5NTd9.rKzFnNbIfol2KPzTq-bUh2sGlxuWFxXSXpkUcyF_6pc"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/employees/add"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"officeUuid\":\"d6a21b87-8168-495f-a4a1-1848503690d6\",\"firstName\":\"meo\",\"middleName\":\"tesw\",\"lastName\":\"test\",\"email\":\"testw@mailna.co\",\"phone\":\"+201061112356\",\"documentType\":\"id-card\",\"documentId\":\"01010100\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/suppliers/employee",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "suppliers",
+                "employee"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change employee info",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.environment.set(\"employeeName\", response.data.fullName);\r",
+                  "pm.environment.set(\"employeeEmail\", response.data.email);\r",
+                  "\r",
+                  "pm.test(\"Employee updated successfully\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"First name is updated\", function () {\r",
+                  "    pm.expect(response.data.firstName).to.eql(\"mo\");\r",
+                  "});\r",
+                  "pm.test(\"Middle name is updated\", function () {\r",
+                  "    pm.expect(response.data.middleName).to.eql(\"test\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Last name is updated\", function () {\r",
+                  "    pm.expect(response.data.lastName).to.eql(\"test\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Email is updated\", function () {\r",
+                  "    pm.expect(response.data.email).to.eql(\"testw@mailna.co\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Phone is updated\", function () {\r",
+                  "    pm.expect(response.data.phone).to.eql(\"+201061112356\");\r",
+                  "});\r",
+                  "\r",
+                  "const responseBody = pm.response.json();\r",
+                  "\r",
+                  "pm.environment.set(\"uuidForEmployee\", responseBody.data.uuid)"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NTA0MDY3LCJleHAiOjE3ODQ1MDc2Njd9.OpYeIc0vlnS5G0gGRuZmCcepdcwjPR7SHMl8HaSxXd8"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/employees/edit/8fc81bbe-8286-4b30-b506-75bdec4e8dd1"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"officeUuid\":\"d6a21b87-8168-495f-a4a1-1848503690d6\",\"firstName\":\"mo\",\"middleName\":\"test\",\"lastName\":\"test\",\"email\":\"testw@mailna.co\",\"phone\":\"+201061112356\",\"documentType\":\"id-card\",\"documentId\":\"01010100\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/suppliers/employee/8fc81bbe-8286-4b30-b506-75bdec4e8dd1",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "suppliers",
+                "employee",
+                "8fc81bbe-8286-4b30-b506-75bdec4e8dd1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "filter employee",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "const uuidForEmployee = pm.environment.get(\"uuidForEmployee\");\r",
+                  "\r",
+                  "pm.test(\"Created employee is found by filter\", function () {\r",
+                  "    pm.expect(response.data.items[0].uuid)\r",
+                  "        .to.eql(uuidForEmployee);\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en-US,en;q=0.9,ar-AE;q=0.8,ar;q=0.7"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NTA0MDY3LCJleHAiOjE3ODQ1MDc2Njd9.OpYeIc0vlnS5G0gGRuZmCcepdcwjPR7SHMl8HaSxXd8"
+              },
+              {
+                "key": "if-none-match",
+                "value": "W/\"14e4-0DAzspSu0etDMNln2MO8wDa6SAA\""
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/employees/manage"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api//v1/rental-car-service/suppliers/employee?supplierUuid=351b306b-c762-431c-b679-882748b0ec6e&offset=1&limit=10&email={{employeeEmail}}",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "",
+                "v1",
+                "rental-car-service",
+                "suppliers",
+                "employee"
+              ],
+              "query": [
+                {
+                  "key": "supplierUuid",
+                  "value": "351b306b-c762-431c-b679-882748b0ec6e"
+                },
+                {
+                  "key": "offset",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "email",
+                  "value": "{{employeeEmail}}"
+                },
+                {
+                  "key": "name",
+                  "value": "{{employeeName}}",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "employee",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"employe is deleted successfully\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NTA0MDY3LCJleHAiOjE3ODQ1MDc2Njd9.OpYeIc0vlnS5G0gGRuZmCcepdcwjPR7SHMl8HaSxXd8"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/employees/manage"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/suppliers/employee/{{uuidForEmployee}}",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "suppliers",
+                "employee",
+                "{{uuidForEmployee}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "car data",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseBody = pm.response.json();\r",
+                  "\r",
+                  "pm.environment.set(\"uuidForCar\", responseBody.data.uuid);\r",
+                  "\r",
+                  "pm.test(\"Register car in  inventory successfully\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NTQ3OTU4LCJleHAiOjE3ODQ1NTE1NTh9.DLSYfTatzI1OPzqRmkN0DNlu2Fb-pIHpc1-9WmAQios"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/inventory/add"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"supplierUuid\":\"351b306b-c762-431c-b679-882748b0ec6e\",\"officeUuid\":\"c1279ee7-7982-41e8-9547-bf2cd0428119\",\"engineTypeUuid\":\"d48ce7d7-1c85-49db-8f33-c5f12f16e5ec\",\"bodyTypeUuid\":\"12a9e2fd-0bb4-40af-9028-571b30df1c9f\",\"sizeUuid\":\"49b02830-f8cd-4c09-bc12-d035a44cbcb6\",\"carModelUuid\":\"00ee0496-136f-414c-b817-896286cacd3b\",\"year\":2025,\"noOfSeats\":2,\"noOfBaggages\":2,\"quantity\":1,\"equipments\":[\"5f985133-072e-4d8e-ae56-3602b2fde968\",\"bf76f220-9905-4e2f-bc54-8670ee4224e2\",\"c586df51-8b1b-4dfb-a8fb-42d563f4aeb1\",\"d5f4a849-c51a-44c8-9cd8-a53417409086\",\"e0238628-6de4-4f68-83a4-90d91c8ad40d\"],\"services\":[\"9b58f2a2-cedf-4ba5-9f6c-d9b59e7e7f32\",\"d58c0d9e-82cc-4655-8814-ff6e74eff586\",\"dd24c2ea-263c-4ad6-844e-1f0e465e2664\",\"e3052180-c704-462d-ba0e-a04b4eac1ffb\"],\"currency\":\"SAR\",\"dailyKm\":0,\"dailyPrice\":0,\"monthlyKm\":0,\"monthlyPrice\":0,\"excessKmPrice\":0}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/inventories/inventory",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "inventories",
+                "inventory"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "inventory car",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NTQ3OTU4LCJleHAiOjE3ODQ1NTE1NTh9.DLSYfTatzI1OPzqRmkN0DNlu2Fb-pIHpc1-9WmAQios"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/inventory/edit/720f152a-72a3-4254-a5b7-9ee997f2cec7"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"supplierUuid\":\"351b306b-c762-431c-b679-882748b0ec6e\",\"officeUuid\":\"c1279ee7-7982-41e8-9547-bf2cd0428119\",\"engineTypeUuid\":\"d48ce7d7-1c85-49db-8f33-c5f12f16e5ec\",\"bodyTypeUuid\":\"12a9e2fd-0bb4-40af-9028-571b30df1c9f\",\"sizeUuid\":\"49b02830-f8cd-4c09-bc12-d035a44cbcb6\",\"carModelUuid\":\"00ee0496-136f-414c-b817-896286cacd3b\",\"year\":2025,\"noOfSeats\":2,\"noOfBaggages\":2,\"quantity\":1,\"equipments\":[\"5f985133-072e-4d8e-ae56-3602b2fde968\",\"bf76f220-9905-4e2f-bc54-8670ee4224e2\",\"c586df51-8b1b-4dfb-a8fb-42d563f4aeb1\",\"d5f4a849-c51a-44c8-9cd8-a53417409086\",\"e0238628-6de4-4f68-83a4-90d91c8ad40d\"],\"services\":[\"9b58f2a2-cedf-4ba5-9f6c-d9b59e7e7f32\",\"d58c0d9e-82cc-4655-8814-ff6e74eff586\",\"dd24c2ea-263c-4ad6-844e-1f0e465e2664\",\"e3052180-c704-462d-ba0e-a04b4eac1ffb\"],\"currency\":\"SAR\",\"dailyKm\":0,\"dailyPrice\":0,\"monthlyKm\":0,\"monthlyPrice\":0,\"excessKmPrice\":0}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/inventories/inventory/{{uuidForCar}}",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "inventories",
+                "inventory",
+                "{{uuidForCar}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"car is deleted successfully\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"no errors in response\", function () {\r",
+                  "    pm.expect(pm.response.json().errors).to.equal(null);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJAYmR1bF9yYWhtYW4gNDU0NjUifSwiZW1haWwiOiJhbG1hdGFyX3N1cHBsaWVyMjJAeW9wbWFpbC5jb20iLCJ2YXRObyI6IlYxMjIyMjMzNjk4OCIsInN0YXR1cyI6ImFjdGl2ZSJ9fSwiaWF0IjoxNzg0NTQ3OTU4LCJleHAiOjE3ODQ1NTE1NTh9.DLSYfTatzI1OPzqRmkN0DNlu2Fb-pIHpc1-9WmAQios"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/pages/inventory/manage"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?0"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Windows\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+              }
+            ],
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/inventories/inventory/b6db814e-2cd6-4b3e-8388-e3a5947cd4a6",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "inventories",
+                "inventory",
+                "b6db814e-2cd6-4b3e-8388-e3a5947cd4a6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Location_inventory",
+      "item": [
+        {
+          "name": "Location",
+          "item": [
+            {
+              "name": "add",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "pm.variables.set(\"lat\", (28.03 + Math.random() * 0.02).toFixed(5));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();\r",
+                      "\r",
+                      "pm.environment.set(\"location_uuid\", response.data.location_uuid);\r",
+                      "pm.environment.set(\"node_name\", response.data.node_name);\r",
+                      "pm.environment.set(\"type\", response.data.type);\r",
+                      "pm.environment.set(\"province\", response.data.province);\r",
+                      "pm.environment.set(\"country\", response.data.country);\r",
+                      "\r",
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJNYXNoaTEgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDc5NzEzNywiZXhwIjoxNzg0ODAwNzM3fQ.tBksukqVmwdFvxjTks6Ejv7g4KXeQKF4O0rEFHbOmHw"
+                  },
+                  {
+                    "key": "content-type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "origin",
+                    "value": "https://cars.alpha.alm6ar.com"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "u=1, i"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://cars.alpha.alm6ar.com/pages/location-inventory/add"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"node_name\":\"2 Bedroom Apartment The View resort Nabq Bay, Sharm El-Sheikh, Egypt\",\"type\":\"hotel\",\"province\":\"Sharm El-Sheikh\",\"lat\":{{lat}},\"lng\":34.4274,\"country\":\"Egypt\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/location/node/add",
+                  "protocol": "https",
+                  "host": [
+                    "cars",
+                    "alpha",
+                    "alm6ar",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rental-car-service",
+                    "location",
+                    "node",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "filter",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();\r",
+                      "\r",
+                      "pm.test(\"Created location is found by filter\", function () {\r",
+                      "    pm.expect(\r",
+                      "        response.data.items.some(item =>\r",
+                      "            item.location_uuid === pm.environment.get(\"location_uuid\")\r",
+                      "        )\r",
+                      "    ).to.be.true;\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "en-US,en;q=0.9,ar-AE;q=0.8,ar;q=0.7"
+                  },
+                  {
+                    "key": "authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJNYXNoaTEgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDc5NzEzNywiZXhwIjoxNzg0ODAwNzM3fQ.tBksukqVmwdFvxjTks6Ejv7g4KXeQKF4O0rEFHbOmHw"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "u=1, i"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://cars.alpha.alm6ar.com/pages/location-inventory/manage"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+                  }
+                ],
+                "url": {
+                  "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/location/node/list?country={{country}}&province={{province}}&type={{type}}&node_name={{node_name}}&offset=1&limit=10",
+                  "protocol": "https",
+                  "host": [
+                    "cars",
+                    "alpha",
+                    "alm6ar",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rental-car-service",
+                    "location",
+                    "node",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "{{country}}"
+                    },
+                    {
+                      "key": "province",
+                      "value": "{{province}}"
+                    },
+                    {
+                      "key": "type",
+                      "value": "{{type}}"
+                    },
+                    {
+                      "key": "node_name",
+                      "value": "{{node_name}}"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "rate",
+          "item": [
+            {
+              "name": "add",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();\r",
+                      "\r",
+                      "pm.environment.set(\"rate_uuid\", response.data.rate_uuid);\r",
+                      "\r",
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJNYXNoaTEgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDgwMTA5NywiZXhwIjoxNzg0ODA0Njk3fQ.oguFvCp-7-qyEsBqYKfisqtH-fpx_b7XrgX5GAaA3gA"
+                  },
+                  {
+                    "key": "content-type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "origin",
+                    "value": "https://cars.alpha.alm6ar.com"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "u=1, i"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://cars.alpha.alm6ar.com/pages/location-inventory/add-rate"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"rate_name\":\"no\",\"amount\":100,\"currency\":\"SAR\",\"valid_from\":1784754000,\"valid_to\":1785358800,\"is_hourly\":true,\"created_by\":\"Mashi1 Mashi2\",\"supplier_uuid\":\"351b306b-c762-431c-b679-882748b0ec6e\",\"units\":8}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/location/rates/add",
+                  "protocol": "https",
+                  "host": [
+                    "cars",
+                    "alpha",
+                    "alm6ar",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rental-car-service",
+                    "location",
+                    "rates",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Request",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();\r",
+                      "\r",
+                      "pm.test(\"Created rate exists\", function () {\r",
+                      "    pm.expect(response.data.rate_uuid)\r",
+                      "        .to.eql(pm.environment.get(\"rate_uuid\"));\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJNYXNoaTEgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDgwMTA5NywiZXhwIjoxNzg0ODA0Njk3fQ.oguFvCp-7-qyEsBqYKfisqtH-fpx_b7XrgX5GAaA3gA"
+                  },
+                  {
+                    "key": "content-type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "u=1, i"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://cars.alpha.alm6ar.com/pages/location-inventory/edit-rate/62d48e54-d3ec-4fa5-b0e8-bbcbb2ae2438"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+                  }
+                ],
+                "url": {
+                  "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/location/rates/{{rate_uuid}}",
+                  "protocol": "https",
+                  "host": [
+                    "cars",
+                    "alpha",
+                    "alm6ar",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rental-car-service",
+                    "location",
+                    "rates",
+                    "{{rate_uuid}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Request",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "\r",
+                      "pm.test(\"Rate name was updated\", function () {\r",
+                      "    pm.expect(pm.response.json().data.rate_name).to.eql(\"no\");\r",
+                      "});\r",
+                      "\r",
+                      "const response = pm.response.json();\r",
+                      "\r",
+                      "pm.environment.set(\"rate_uuid\", response.data.rate_uuid);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJNYXNoaTEgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDgwMTA5NywiZXhwIjoxNzg0ODA0Njk3fQ.oguFvCp-7-qyEsBqYKfisqtH-fpx_b7XrgX5GAaA3gA"
+                  },
+                  {
+                    "key": "content-type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "origin",
+                    "value": "https://cars.alpha.alm6ar.com"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "u=1, i"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://cars.alpha.alm6ar.com/pages/location-inventory/edit-rate/62d48e54-d3ec-4fa5-b0e8-bbcbb2ae2438"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"rate_name\":\"no\",\"amount\":100,\"currency\":\"SAR\",\"valid_from\":1784754000,\"valid_to\":1785358800,\"is_hourly\":true,\"created_by\":\"Mashi1 Mashi2\",\"supplier_uuid\":\"351b306b-c762-431c-b679-882748b0ec6e\",\"units\":8}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/location/rates/update/{{rate_uuid}}",
+                  "protocol": "https",
+                  "host": [
+                    "cars",
+                    "alpha",
+                    "alm6ar",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rental-car-service",
+                    "location",
+                    "rates",
+                    "update",
+                    "{{rate_uuid}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Request",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"item existed and deleted\", function () {\r",
+                      "    pm.expect(pm.response.json().errors).to.equal(null);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJNYXNoaTEgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDgwMTA5NywiZXhwIjoxNzg0ODA0Njk3fQ.oguFvCp-7-qyEsBqYKfisqtH-fpx_b7XrgX5GAaA3gA"
+                  },
+                  {
+                    "key": "content-type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "origin",
+                    "value": "https://cars.alpha.alm6ar.com"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "u=1, i"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://cars.alpha.alm6ar.com/pages/location-inventory/manage-rate"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+                  }
+                ],
+                "url": {
+                  "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/location/rates/delete/bf240a55-b62c-4814-8dac-112b8d7732f5",
+                  "protocol": "https",
+                  "host": [
+                    "cars",
+                    "alpha",
+                    "alm6ar",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rental-car-service",
+                    "location",
+                    "rates",
+                    "delete",
+                    "bf240a55-b62c-4814-8dac-112b8d7732f5"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "schedule",
+          "item": [
+            {
+              "name": "New Request",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();\r",
+                      "\r",
+                      "pm.environment.set(\"schedule_uuid\", response.data.schedule_uuid);\r",
+                      "\r",
+                      "pm.environment.set(\"schedule_name\", response.data.schedule_name);\r",
+                      "pm.environment.set(\"route_uuid_ref\", response.data.route_uuid_ref);\r",
+                      "pm.environment.set(\"rate_uuid_ref\", response.data.rate_uuid_ref);\r",
+                      "pm.environment.set(\"inventory_uuid_ref\", response.data.inventory_uuid_ref);\r",
+                      "\r",
+                      "pm.test(\"Status code is 201\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJNYXNoaTEgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDgwMTA5NywiZXhwIjoxNzg0ODA0Njk3fQ.oguFvCp-7-qyEsBqYKfisqtH-fpx_b7XrgX5GAaA3gA"
+                  },
+                  {
+                    "key": "content-type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "origin",
+                    "value": "https://cars.alpha.alm6ar.com"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "u=1, i"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://cars.alpha.alm6ar.com/pages/location-inventory/add-schedule"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"schedule_name\":\"dnee\",\"route_uuid_ref\":\"14f3bbc4-091a-4044-a6b8-100325a99a9d\",\"rate_uuid_ref\":\"789818ca-eb35-43cd-a2d1-018acdbeeb3e\",\"inventory_uuid_ref\":\"17899aa4-8095-49b6-98f7-f1371ba93c34\",\"inventory_group_ref\":\"\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/location/schedule/add",
+                  "protocol": "https",
+                  "host": [
+                    "cars",
+                    "alpha",
+                    "alm6ar",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rental-car-service",
+                    "location",
+                    "schedule",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Request",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();\r",
+                      "\r",
+                      "pm.environment.set(\"schedule_uuid\", response.data.schedule_uuid);\r",
+                      "\r",
+                      "\r",
+                      "pm.test(\"Schedule name was updated\", function () {\r",
+                      "    pm.expect(pm.response.json().data.schedule_name).to.eql(\"dnee\");\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJNYXNoaTEgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDgwMTA5NywiZXhwIjoxNzg0ODA0Njk3fQ.oguFvCp-7-qyEsBqYKfisqtH-fpx_b7XrgX5GAaA3gA"
+                  },
+                  {
+                    "key": "content-type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "origin",
+                    "value": "https://cars.alpha.alm6ar.com"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "u=1, i"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://cars.alpha.alm6ar.com/pages/location-inventory/edit-schedule/2d4d5fc4-b1de-499c-82e7-3595633f50c5"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"schedule_name\":\"dnee\",\"route_uuid_ref\":\"14f3bbc4-091a-4044-a6b8-100325a99a9d\",\"rate_uuid_ref\":\"789818ca-eb35-43cd-a2d1-018acdbeeb3e\",\"inventory_uuid_ref\":\"17899aa4-8095-49b6-98f7-f1371ba93c34\",\"inventory_group_ref\":\"\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/location/schedule/update/{{schedule_uuid}}",
+                  "protocol": "https",
+                  "host": [
+                    "cars",
+                    "alpha",
+                    "alm6ar",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rental-car-service",
+                    "location",
+                    "schedule",
+                    "update",
+                    "{{schedule_uuid}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Request",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "accept",
+                    "value": "application/json, text/plain, */*"
+                  },
+                  {
+                    "key": "accept-language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJ1c2VyIjp7InV1aWQiOiJiMGJkNTk0My0wOTcxLTQyYjMtODBmMy03YWQyMDJmOTI2YWMiLCJlbWFpbCI6ImFsbWF0YXJfc3VwcGxpZXIyMkB5b3BtYWlsLmNvbSIsImxhbmd1YWdlIjoiZW4iLCJzdXBlckFkbWluIjpmYWxzZSwic3VwcGxpZXIiOnsidXVpZCI6IjM1MWIzMDZiLWM3NjItNDMxYy1iNjc5LTg4Mjc0OGIwZWM2ZSIsIm5hbWUiOnsiZW4iOiJNYXNoaTEgTWFzaGkyIn0sImVtYWlsIjoiYWxtYXRhcl9zdXBwbGllcjIyQHlvcG1haWwuY29tIiwidmF0Tm8iOiJWMTIyMjIzMzY5ODgiLCJzdGF0dXMiOiJhY3RpdmUifX0sImlhdCI6MTc4NDgwMTA5NywiZXhwIjoxNzg0ODA0Njk3fQ.oguFvCp-7-qyEsBqYKfisqtH-fpx_b7XrgX5GAaA3gA"
+                  },
+                  {
+                    "key": "content-type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "origin",
+                    "value": "https://cars.alpha.alm6ar.com"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "u=1, i"
+                  },
+                  {
+                    "key": "referer",
+                    "value": "https://cars.alpha.alm6ar.com/pages/location-inventory/manage-schedule"
+                  },
+                  {
+                    "key": "sec-ch-ua",
+                    "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Google Chrome\";v=\"150\""
+                  },
+                  {
+                    "key": "sec-ch-ua-mobile",
+                    "value": "?0"
+                  },
+                  {
+                    "key": "sec-ch-ua-platform",
+                    "value": "\"Windows\""
+                  },
+                  {
+                    "key": "sec-fetch-dest",
+                    "value": "empty"
+                  },
+                  {
+                    "key": "sec-fetch-mode",
+                    "value": "cors"
+                  },
+                  {
+                    "key": "sec-fetch-site",
+                    "value": "same-origin"
+                  },
+                  {
+                    "key": "user-agent",
+                    "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+                  }
+                ],
+                "url": {
+                  "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/location/schedule/delete/{{schedule_uuid}}",
+                  "protocol": "https",
+                  "host": [
+                    "cars",
+                    "alpha",
+                    "alm6ar",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "rental-car-service",
+                    "location",
+                    "schedule",
+                    "delete",
+                    "{{schedule_uuid}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "register",
+      "item": [
+        {
+          "name": "supplier",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.variables.set(\"randomEmailNumber\", Math.floor(Math.random() * 1000));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.environment.set(\"supuuid\", response.data.schedule_uuid);\r",
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "accept",
+                "value": "application/json, text/plain, */*"
+              },
+              {
+                "key": "accept-language",
+                "value": "en"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "origin",
+                "value": "https://cars.alpha.alm6ar.com"
+              },
+              {
+                "key": "priority",
+                "value": "u=1, i"
+              },
+              {
+                "key": "referer",
+                "value": "https://cars.alpha.alm6ar.com/auth/register"
+              },
+              {
+                "key": "sec-ch-ua",
+                "value": "\"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"150\", \"Microsoft Edge\";v=\"150\""
+              },
+              {
+                "key": "sec-ch-ua-mobile",
+                "value": "?1"
+              },
+              {
+                "key": "sec-ch-ua-platform",
+                "value": "\"Android\""
+              },
+              {
+                "key": "sec-fetch-dest",
+                "value": "empty"
+              },
+              {
+                "key": "sec-fetch-mode",
+                "value": "cors"
+              },
+              {
+                "key": "sec-fetch-site",
+                "value": "same-origin"
+              },
+              {
+                "key": "user-agent",
+                "value": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":{\"en\":\"super11\"},\"email\":\"ae7430098d+4{{randomEmailNumber}}@emailinbo.live\",\"vatNo\":\"1\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://cars.alpha.alm6ar.com/api/v1/rental-car-service/suppliers/supplier",
+              "protocol": "https",
+              "host": [
+                "cars",
+                "alpha",
+                "alm6ar",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "rental-car-service",
+                "suppliers",
+                "supplier"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
