@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="All Test Suite">
+
+    <test name="All Tests">
+
+        <classes>
+            <class name="Tests.CurrencyAndLangTest"/>
+            <class name="Tests.SortTest"/>
+            <class name="Tests.PriceFilterTest"/>
+            <class name="Tests.FavTest"/>
+            <class name="Tests.HotDeals"/>
+            <class name="Tests.HomeTest"/>
+
+
+
+        </classes>
+
+    </test>
+
+</suite>
