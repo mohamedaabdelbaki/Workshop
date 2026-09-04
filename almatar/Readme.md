@@ -48,5 +48,4 @@ Some of the more important ones were:
 
 - Postman
 - Chrome DevTools
-- Web Browser
 - Excel
